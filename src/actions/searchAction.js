@@ -1,7 +1,17 @@
 // Action Creator
 import { setSearchStatus } from './creators/search'
+import { SET_SEARCH_RESULT } from './types'
+import Axios from 'axios'
+import api from '../api'
 
 export const searchDispatch = requestBody => dispatch => {
   dispatch(setSearchStatus(true))
-  setTimeout(() => dispatch(setSearchStatus(false)), 5000)
+  Axios.post(api.spreadsheet.search, requestBody).then(
+    ({ data: { searchResults } }) => {
+      dispatch({
+        type: SET_SEARCH_RESULT,
+        payload: searchResults,
+      })
+    }
+  )
 }

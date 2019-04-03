@@ -1,4 +1,8 @@
-const baseUrl = 'http://localhost:3000/api'
+// Test Server
+// const baseUrl = 'http://localhost:3000/api'
+
+// Real Server
+const baseUrl = 'https://dfo-data-tool.herokuapp.com/api'
 
 const bindUrl = path => `${baseUrl}${path}`
 

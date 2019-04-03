@@ -1,13 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import color from '../../../themes/color'
-import isEmpty from '../../../validation/isEmpty'
 // UI Components
 import { TextArea, Input } from '../../../themes/styled_comp/InputGroup'
 import {
   List,
   Card,
-  Cardcontent,
   Cardtitle,
   UpdateBy,
 } from '../DashboardLayout/AddSpreadsheet'
@@ -88,9 +86,23 @@ const CardtitleStyled = styled(Cardtitle)`
   text-transform: none;
 `
 
-const CardcontentStyled = styled(Cardcontent)`
+const CardcontentStyled = styled.textarea`
+  &:focus {
+    border-color: dodgerblue;
+  }
   font-weight: 400;
   font-size: 14px;
+  resize: none;
+  border-radius: 2px;
+  color: ${color.text.gray}
+  margin-top: 12px;
+  text-transform: none;
+  font-size: 13px;
+  box-sizing: border-box;
+  padding: 6px 12px;
+  min-height: 4rem;
+  border: 1px dashed rgba(50, 50, 50, .15);
+  outline: none;
 `
 
 export default ({ onChange, onSubmit, searching, searchResults, search }) => {

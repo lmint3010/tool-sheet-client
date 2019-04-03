@@ -7,9 +7,11 @@ import {
   deleteSpreadsheetDispatch,
   fetchSpreadsheetDispatch,
 } from '../../actions/spreadsheetAction'
+import { setLoadingSpreadsheet } from '../../actions/creators/spreadsheet'
 import { getAllSpreadsheet } from '../../actions/spreadsheetAction'
 import api from '../../api'
 import Axios from 'axios'
+import store from '../../store'
 
 // Stateful Component AddSpreadsheet
 class AddSpreadsheet extends Component {
@@ -65,7 +67,9 @@ class AddSpreadsheet extends Component {
   }
 
   async componentDidMount() {
+    store.dispatch(setLoadingSpreadsheet(true))
     const list = await getAllSpreadsheet()
+    store.dispatch(setLoadingSpreadsheet(false))
     this.setState({ list })
   }
 

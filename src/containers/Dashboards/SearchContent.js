@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import SearchContentUI from '../../components/Layout/DashboardLayout/SearchContent'
-import store from '../../store'
-import { setSearchStatus } from '../../actions/creators/search'
+import { searchDispatch } from '../../actions/searchAction'
 import { connect } from 'react-redux'
-import Axios from 'axios'
-import api from '../../api'
 
 class SearchContent extends Component {
   state = {
@@ -16,8 +13,14 @@ class SearchContent extends Component {
     searchResults: [],
   }
 
-  componentWillReceiveProps({ reduxState: { searching } }) {
-    if (searching !== this.state.searching) this.setState({ searching })
+  componentWillReceiveProps({
+    reduxState: {
+      searching: { status, result },
+    },
+  }) {
+    if (status !== this.state.searching) this.setState({ searching: status })
+    if (result && result.length !== 0) this.setState({ searchResults: result })
+    else this.setState({ searchResults: [] })
   }
 
   handleFormChange = ({ target }) => {
@@ -31,15 +34,10 @@ class SearchContent extends Component {
   handleFormSubmit = e => {
     e.preventDefault()
     const {
-      state: { search: bodyRequest },
+      state: { search: requestBody },
+      props: { searchDispatch },
     } = this
-    store.dispatch(setSearchStatus(true))
-    Axios.post(api.spreadsheet.search, bodyRequest).then(
-      ({ data: { searchResults } }) => {
-        store.dispatch(setSearchStatus(false))
-        this.setState({ searchResults })
-      }
-    )
+    searchDispatch(requestBody)
   }
 
   render() {
@@ -64,4 +62,9 @@ const mapStateToProps = ({ searching }) => ({
   reduxState: { searching },
 })
 
-export default connect(mapStateToProps)(SearchContent)
+const mapDispatchToProps = { searchDispatch }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchContent)
