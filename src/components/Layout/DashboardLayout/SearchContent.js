@@ -105,20 +105,36 @@ const CardcontentStyled = styled.textarea`
   outline: none;
 `
 
-export default ({ onChange, onSubmit, searching, searchResults, search }) => {
+const Filter = styled.p`
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: rgba(50, 50, 50, 0.8);
+`
+
+const searchUIComponent = ({
+  onChange,
+  onSubmit,
+  searching,
+  searchResults,
+  searchOnCode,
+  filter,
+  filterList,
+}) => {
   // Check searching status and render list of results
   let resultsList = <Spinner />
   if (!searching) {
     let result = <NoneResult>No documents found...</NoneResult>
     resultsList = <ListStyled>{result}</ListStyled>
     if (searchResults && searchResults.length !== 0) {
-      result = searchResults.map(({ site, sheet, code, content, english }) => (
-        <ContentCard>
-          <CardDetails>{`${site} - ${sheet} - ${code}`}</CardDetails>
-          <CardtitleStyled>{english}</CardtitleStyled>
-          <CardcontentStyled>{content}</CardcontentStyled>
-        </ContentCard>
-      ))
+      result = searchResults.map(
+        ({ site, sheet, code, content, english }, index) => (
+          <ContentCard key={index}>
+            <CardDetails>{`${site} - ${sheet} - ${code}`}</CardDetails>
+            <CardtitleStyled>{english}</CardtitleStyled>
+            <CardcontentStyled defaultValue={content} />
+          </ContentCard>
+        )
+      )
       resultsList = <ListStyled>{result}</ListStyled>
     }
   }
@@ -151,10 +167,23 @@ export default ({ onChange, onSubmit, searching, searchResults, search }) => {
 
       <Path>
         <Title>
-          Search Results for <LanguageCode>{search.code || '...'}</LanguageCode>
+          Search Results for{' '}
+          <LanguageCode>{searchOnCode || '...'}</LanguageCode>
         </Title>
+        <Filter>
+          Filter:{' '}
+          <span>
+            <select onChange={filter}>
+              {filterList.map((value, index) => (
+                <option key={index}>{value}</option>
+              ))}
+            </select>
+          </span>
+        </Filter>
         {resultsList}
       </Path>
     </>
   )
 }
+
+export default React.memo(searchUIComponent)

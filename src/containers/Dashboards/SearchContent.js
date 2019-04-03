@@ -11,6 +11,7 @@ class SearchContent extends Component {
     },
     searching: false,
     searchResults: [],
+    filterList: ['All'],
   }
 
   componentWillReceiveProps({
@@ -19,8 +20,18 @@ class SearchContent extends Component {
     },
   }) {
     if (status !== this.state.searching) this.setState({ searching: status })
-    if (result && result.length !== 0) this.setState({ searchResults: result })
-    else this.setState({ searchResults: [] })
+    if (result && result.length !== 0) {
+      const filterList = [...this.state.filterList]
+      result
+        .map(e => e.site)
+        .forEach(site => {
+          if (!filterList.includes(site)) filterList.push(site)
+        })
+      this.setState({
+        searchResults: result,
+        filterList,
+      })
+    } else this.setState({ searchResults: [] })
   }
 
   handleFormChange = ({ target }) => {
@@ -40,19 +51,43 @@ class SearchContent extends Component {
     searchDispatch(requestBody)
   }
 
+  handleResultFilter = ({ target }) => {
+    const {
+      props: {
+        reduxState: {
+          searching: { result },
+        },
+      },
+    } = this
+    if (target.value === 'All') {
+      this.setState({ searchResults: result })
+    } else {
+      const nextState = {
+        searchResults: result.filter(
+          result =>
+            result.site.toLowerCase().trim() === target.value.toLowerCase()
+        ),
+      }
+      this.setState(nextState)
+    }
+  }
+
   render() {
     const {
       handleFormChange,
       handleFormSubmit,
-      state: { searching, searchResults, search },
+      handleResultFilter,
+      state: { searching, searchResults, search, filterList },
     } = this
     return (
       <SearchContentUI
-        search={search}
+        searchOnCode={search.code}
         searchResults={searchResults}
         searching={searching}
         onSubmit={handleFormSubmit}
         onChange={handleFormChange}
+        filter={handleResultFilter}
+        filterList={filterList}
       />
     )
   }
