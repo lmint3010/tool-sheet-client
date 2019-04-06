@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import NavbarUI from '../components/Layout/Navbar'
+import NavbarUI from '../components/Layout/Navbar/index'
 
 // Import Dispatch
 import { LogoutDispatch } from '../actions/userAuthAction'

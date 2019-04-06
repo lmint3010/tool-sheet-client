@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import color from '../../../themes/color'
+import theme from '../../../themes'
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 const Title = styled.h2`
   text-align: center;
   font-size: 18px;
-  color: ${color.text.dark};
+  color: ${theme.color.text.dark};
 `
 
 export default props => (

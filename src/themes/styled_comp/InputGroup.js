@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import color from '../color'
+import theme from '../index'
 
 const Wrapper = styled.div`
   display: flex;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `
 
 const Label = styled.p`
-  color: ${color.text.gray};
+  color: ${theme.color.text.gray};
   font-size: 14px;
   font-weight: 600;
   padding: 7px 14px;
@@ -31,7 +31,7 @@ export const Input = styled.input`
   border-style: solid;
   border-color: ${props => props.borderColor};
   border-radius: 4px;
-  color: ${color.text.gray};
+  color: ${theme.color.text.gray};
   font-weight: 500;
   height: calc(1.4285714286em + 0.75rem + 2px);
   box-sizing: border-box;
@@ -53,7 +53,7 @@ export const TextArea = styled.textarea`
   border-style: solid;
   border-color: ${props => props.borderColor};
   border-radius: 4px;
-  color: ${color.text.gray};
+  color: ${theme.color.text.gray};
   font-weight: 500;
   height: calc(1.4285714286em + 0.75rem + 2px);
   box-sizing: border-box;
@@ -68,14 +68,14 @@ const InputBox = styled.div`
 `
 
 const Desc = styled.div`
-  color: ${color.text.grayLight}
+  color: ${theme.color.text.grayLight}
   font-size: 12px;
   margin: 8px 0;
   text-align: left;
 `
 
 export const Error = styled.div`
-color: ${color.text.danger}
+color: ${theme.color.text.danger}
 font-size: 12px;
 margin: 8px 0;
 text-align: left;
@@ -99,7 +99,7 @@ export default ({
         name={name}
         type={type || 'text'}
         placeholder={placeholder}
-        borderColor={!error ? 'rgba(135,150,165,.15)' : color.text.danger}
+        borderColor={!error ? 'rgba(135,150,165,.15)' : theme.color.text.danger}
       />
       <Desc>{desc}</Desc>
       {error ? <Error>{error}</Error> : null}

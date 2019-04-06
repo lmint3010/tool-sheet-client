@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import AddSpreadsheetUI from '../../components/Layout/DashboardLayout/AddSpreadsheet'
+import AddSpreadsheetUI from '../../components/Layout/AddSpreadsheet'
 import isEmpty from '../../validation/isEmpty'
 import {
   addNewSpreadsheetDispatch,

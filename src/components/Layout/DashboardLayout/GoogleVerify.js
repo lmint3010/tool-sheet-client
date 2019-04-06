@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import '../../../assets/icons/all.min.css'
-import color from '../../../themes/color'
+import theme from '../../../themes'
 
 // UI Components
 import { Input, Error } from '../../../themes/styled_comp/InputGroup'
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 
 const SheildLogo = styled.i`
   font-size: 65px;
-  color: ${color.text.success};
+  color: ${theme.color.text.success};
 `
 
 const TitleBox = styled.div`
@@ -33,7 +33,7 @@ const TitleBox = styled.div`
 const Title = styled.h2`
   font-size: 28px;
   margin: 12px 0;
-  color: ${color.text.success};
+  color: ${theme.color.text.success};
   user-select: none;
 `
 
@@ -42,15 +42,15 @@ const Subtitle = styled.p`
   margin: 0;
   margin-bottom: 24px;
   font-weight: 500;
-  color: ${color.text.gray};
+  color: ${theme.color.text.gray};
   user-select: none;
 `
 
 const Input2 = styled(Input)`
   &::placeholder {
     text-align: center;
-  };
-  border-color: rgba(50, 50, 50, .15);
+  }
+  border-color: rgba(50, 50, 50, 0.15);
   min-width: 20vw;
   text-align: center;
 `
@@ -74,24 +74,27 @@ const GetCodeButton = styled.button`
   border: none;
   font-size: 12px;
   text-decoration: underline;
-  color: ${color.text.gray}
+  color: ${theme.color.text.gray}
   cursor: pointer;
 `
 
-export default ({ onChange, onSubmit, errors, getCode }) => (<Wrapper>
-  <TitleBox>
-    <SheildLogo className='fas fa-shield-check' />
-    <Title>Google Authenticate</Title>
-    <Subtitle>Please enter the verify code provide by Google</Subtitle>
-    <Form onSubmit={onSubmit}>
-      <Input2
-        onChange={onChange}
-        placeholder='Google Verify Code'
-        name='code'
-        type='password'/>
-      <Submit2 type='submit' value='Send' />
-    </Form>
-    <GetCodeButton onClick={getCode}>Get Google Verify Code</GetCodeButton>
-    { errors ? <CenterError>{errors}</CenterError> : <CenterError /> }
-  </TitleBox>
-</Wrapper>)
+export default ({ onChange, onSubmit, errors, getCode }) => (
+  <Wrapper>
+    <TitleBox>
+      <SheildLogo className="fas fa-shield-check" />
+      <Title>Google Authenticate</Title>
+      <Subtitle>Please enter the verify code provide by Google</Subtitle>
+      <Form onSubmit={onSubmit}>
+        <Input2
+          onChange={onChange}
+          placeholder="Google Verify Code"
+          name="code"
+          type="password"
+        />
+        <Submit2 type="submit" value="Send" />
+      </Form>
+      <GetCodeButton onClick={getCode}>Get Google Verify Code</GetCodeButton>
+      {errors ? <CenterError>{errors}</CenterError> : <CenterError />}
+    </TitleBox>
+  </Wrapper>
+)
