@@ -17,9 +17,10 @@ import {
   List,
   ItemIcon,
   Content,
+  Powered,
 } from './styled'
 
-const NavbarUI = ({ user, logout, toolbox, onChange }) => {
+const NavbarUI = ({ user, logout, toolbox, onChange, options }) => {
   const currentPath = window.location.pathname
   return (
     <Nav>
@@ -39,6 +40,24 @@ const NavbarUI = ({ user, logout, toolbox, onChange }) => {
 
         <Title>Settings</Title>
         <List>
+          {options.map((item, index) => (
+            <StyledLink
+              className={item.disabled ? 'disable-href' : null}
+              to={item.path}
+              color={
+                item.isActive || currentPath === item.path
+                  ? theme.color.text.main
+                  : null
+              }
+              index={index}
+              key={index}
+              onClick={() => onChange(index, 'options')}>
+              <ItemIcon>
+                <i className={item.icon} />
+              </ItemIcon>
+              <Content>{item.title}</Content>
+            </StyledLink>
+          ))}
           <StyledLink to="/" onClick={logout} color={theme.color.text.danger}>
             <ItemIcon>
               <i className="far fa-sign-out" />
@@ -60,7 +79,7 @@ const NavbarUI = ({ user, logout, toolbox, onChange }) => {
               }
               index={index}
               key={index}
-              onClick={() => onChange(index)}>
+              onClick={() => onChange(index, 'toolbox')}>
               <ItemIcon>
                 <i className={item.icon} />
               </ItemIcon>
@@ -69,6 +88,7 @@ const NavbarUI = ({ user, logout, toolbox, onChange }) => {
           ))}
         </List>
       </NavBody>
+      <Powered>Powered by Coders.Tokyo</Powered>
     </Nav>
   )
 }

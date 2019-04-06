@@ -27,7 +27,6 @@ export const StyledLogo = styled(Logo)`
 export const BrandName = styled.div`
   font-size: ${theme.fontSize.logo};
   font-weight: 700;
-  letter-spacing: -0.8px;
   color: ${theme.color.text.main}
   margin-left: 12px;
 `
@@ -110,4 +109,17 @@ export const ItemIcon = styled.span`
   color: ${props => (props.color ? props.color : 'inherit')}
   display: inline-block;
   width: 16px;
+`
+
+export const Powered = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: ${theme.fontSize.sub_text};
+  color: mediumseagreen;
+  box-sizing: border-box;
+  padding: 0.6rem 0;
+  text-align: center;
+  width: 100%;
+  background-color: rgba(150, 150, 150, 0.12);
 `

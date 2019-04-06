@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 const Label = styled.p`
   color: ${theme.color.text.gray};
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 7px 14px;
   min-width: 25%;
   margin: 10px 0;

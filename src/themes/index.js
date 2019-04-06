@@ -26,11 +26,11 @@ export default {
     },
   },
   fontSize: {
-    logo: '1.125rem',
-    text: '0.875rem',
+    logo: '1rem',
+    text: '0.8rem',
     sub_text: '0.825rem',
     small_text_1: '0.744rem',
     small_text_2: '0.7rem',
-    header: '1.25rem',
+    header: '1.14rem',
   },
 }

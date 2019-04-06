@@ -6,7 +6,7 @@ import { SubmitBtn } from '../../../themes/styled_comp/Form'
 
 export const Title = styled.h1`
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   margin: 10px 0;
   color: ${theme.color.text.dark};
 `
@@ -70,7 +70,7 @@ export const Cardcontent = styled(Cardtitle)`
   color: ${theme.color.text.gray}
   margin: 12px 0;
   text-transform: none;
-  font-weight: 600;
+  font-weight: 500;
   font-size: ${theme.fontSize.sub_text};
 `
 
@@ -96,7 +96,6 @@ export const CardWrapper = styled.div`
   background-color: white;
   flex-grow: 1;
   align-items: center;
-  width: calc(30% - 16px);
 `
 
 export const CardOptions = styled.div`

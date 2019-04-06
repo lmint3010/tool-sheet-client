@@ -6,8 +6,8 @@ import { List, Card, Cardtitle, UpdateBy } from '../AddSpreadsheet/styled'
 import { SubmitBtn } from '../../../themes/styled_comp/Form'
 
 export const Title = styled.h1`
-  font-size: 18px;
-  font-weight: 600;
+  font-size: ${theme.fontSize.header};
+  font-weight: 500;
   margin: 10px 0;
   color: ${theme.color.text.dark};
 `
@@ -45,11 +45,12 @@ export const Path = styled.div`
 export const ContentCard = styled(Card)`
   text-align: left;
   padding: 0.85rem;
-  width: calc(50% - 16px);
+  width: auto;
   margin-right: 16px;
   margin-bottom: 16px;
   box-shadow: ${theme.color.boxShadow.box};
   border-radius: 4px;
+  box-sizing: border-box;
   flex-grow: 1;
 `
 
@@ -74,7 +75,6 @@ export const InputStyled = styled(Input)`
 
 export const ListStyled = styled(List)`
   box-sizing: border-box;
-  flex-wrap: wrap;
   padding: 6px 0;
 `
 
@@ -102,6 +102,7 @@ export const CardcontentStyled = styled.textarea`
   box-sizing: border-box;
   padding: 6px 12px;
   min-height: 6rem;
-  border: 1px dashed rgba(50, 50, 50, .15);
+  border: 1px dashed transparent;
   outline: none;
+  transition: 140ms linear
 `

@@ -29,6 +29,14 @@ class Navbar extends Component {
         disabled: true,
       },
     ],
+    options: [
+      {
+        title: 'My Teammates',
+        path: '/users',
+        icon: 'far fa-users',
+        disabled: false,
+      },
+    ],
   }
 
   handleLogout = () => {
@@ -36,21 +44,28 @@ class Navbar extends Component {
     LogoutDispatch(history)
   }
 
-  handleChange = index => {
+  handleChange = (index, listname) => {
     const nextState = { ...this.state }
-    console.log(this.props)
     nextState.toolbox = nextState.toolbox.map(e => {
       e.isActive = false
       return e
     })
-    nextState.toolbox[index].isActive = true
-    this.setState({ toolbox: nextState.toolbox })
+    nextState.options = nextState.options.map(e => {
+      e.isActive = false
+      return e
+    })
+    if (listname === 'toolbox') {
+      nextState.toolbox[index].isActive = true
+    } else {
+      nextState.options[index].isActive = true
+    }
+    this.setState({ toolbox: nextState.toolbox, options: nextState.options })
   }
 
   render() {
     const {
       props: { reduxState },
-      state: { toolbox },
+      state: { toolbox, options },
       handleLogout,
       handleChange,
     } = this
@@ -60,6 +75,7 @@ class Navbar extends Component {
         user={reduxState.user}
         logout={handleLogout}
         toolbox={toolbox}
+        options={options}
         onChange={handleChange}
       />
     )

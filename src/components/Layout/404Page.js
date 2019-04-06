@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   color: ${theme.color.text.dark};
-  font-weight: 600;
+  font-weight: 500;
 `
 
 const Suggestion = styled.p`

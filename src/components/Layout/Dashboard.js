@@ -8,6 +8,7 @@ import GoogleVerify from '../../containers/Dashboards/GoogleVerify'
 import SearchContent from '../../containers/Dashboards/SearchContent'
 import NeedUpdates from '../../containers/Dashboards/NeedUpdates'
 import Navbar from '../../containers/Navbar'
+import Teammate from '../../containers/Dashboards/Teammate'
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,6 +32,7 @@ export default ({ user }) => (
       <Route exact path="/google-verify" component={GoogleVerify} />
       <Route exact path="/searchcontent" component={SearchContent} />
       <Route exact path="/needupdates" component={NeedUpdates} />
+      <Route exact path="/users" component={Teammate} />
     </Container>
   </Wrapper>
 )
