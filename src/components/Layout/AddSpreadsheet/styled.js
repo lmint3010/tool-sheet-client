@@ -43,6 +43,7 @@ export const List = styled.div`
   display: flex;
   padding: 6px 0;
   width: 100%;
+  flex-wrap: wrap;
 `
 
 export const Card = styled.div`
@@ -87,7 +88,7 @@ export const Author = styled.span`
 export const CardWrapper = styled.div`
   display: flex;
   padding: 16px;
-  margin: 1rem 2rem 1rem 0;
+  margin: 8px 16px 8px 0;
   border-radius: 4px
   box-shadow: ${theme.color.boxShadow.box};
   display: flex;
@@ -95,7 +96,7 @@ export const CardWrapper = styled.div`
   background-color: white;
   flex-grow: 1;
   align-items: center;
-  width: 30%;
+  width: calc(30% - 16px);
 `
 
 export const CardOptions = styled.div`

@@ -50,6 +50,7 @@ export const ContentCard = styled(Card)`
   margin-bottom: 16px;
   box-shadow: ${theme.color.boxShadow.box};
   border-radius: 4px;
+  flex-grow: 1;
 `
 
 export const CardDetails = styled(UpdateBy)`
@@ -100,7 +101,7 @@ export const CardcontentStyled = styled.textarea`
   font-size: 13px;
   box-sizing: border-box;
   padding: 6px 12px;
-  min-height: 4rem;
+  min-height: 6rem;
   border: 1px dashed rgba(50, 50, 50, .15);
   outline: none;
 `
