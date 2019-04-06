@@ -9,8 +9,9 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SEARCHING_CONTENT:
       return {
-        ...initialState,
+        ...state,
         status: action.payload,
+        result: []
       }
     case SET_SEARCH_RESULT:
       return {

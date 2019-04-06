@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SearchContentUI from '../../components/Layout/SearchContent'
 import { searchDispatch } from '../../actions/searchAction'
 import { connect } from 'react-redux'
+import isEmpty from '../../validation/isEmpty'
 
 class SearchContent extends Component {
   state = {
@@ -13,15 +14,29 @@ class SearchContent extends Component {
     searchResults: [],
   }
 
-  componentWillReceiveProps({
-    reduxState: {
-      searching: { status, result },
-    },
-  }) {
-    if (status !== this.state.searching) this.setState({ searching: status })
-    if (result && result.length !== 0) this.setState({ searchResults: result })
-    else this.setState({ searchResults: [] })
+  // TODO: Double check if the behavior is correct
+  static getDerivedStateFromProps(props, state) {
+    const { reduxState: {searching: {status, result}} } = props;
+    if (status !== state.searching) {
+      return { searching: status };
+    }
+
+    if (!isEmpty(result)) {
+      return { searchResults: result };
+    }
+
+    return { searchResults: []}
   }
+
+  // componentWillReceiveProps({
+  //   reduxState: {
+  //     searching: { status, result },
+  //   },
+  // }) {
+  //   if (status !== this.state.searching) this.setState({ searching: status })
+  //   if (result && result.length !== 0) this.setState({ searchResults: result })
+  //   else this.setState({ searchResults: [] })
+  // }
 
   handleFormChange = ({ target }) => {
     const nextState = {

@@ -12,12 +12,12 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case LOADING_SPREADSHEET:
       return {
-        ...initialState,
+        ...state,
         loading: action.payload,
       }
     case FETCHING_SPREADSHEET:
       return {
-        ...initialState,
+        ...state,
         fetching: action.payload,
       }
     default:

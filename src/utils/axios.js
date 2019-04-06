@@ -7,6 +7,6 @@ export const setDefaultToken = token => {
   }
   else {
     // Delete default token
-    delete axios.defaults.headers.common['Authorizaion']
+    delete axios.defaults.headers.common['Authorization']
   }
 }

@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 // Dispatch
 import { LoginDispatch } from '../actions/userAuthAction'
+import isEmpty from '../validation/isEmpty'
 
 class Login extends Component {
   state = {
@@ -14,19 +15,34 @@ class Login extends Component {
     errors: {},
   }
 
-  // Lifecycle method
-  componentWillMount() {
-    const {
-      reduxState: { auth },
-      history,
-    } = this.props
-    if (auth.isAuthenticated) history.push('/dashboard')
+  // TODO: Check - Using GetDerivedStateFromProps in place of the other two DEPRECATED LIfeCycleMethods
+  static getDerivedStateFromProps(props, state) {
+    const { reduxState: { auth, errors }, history } =  props;
+    if (auth.isAuthenticated) {
+      history.push('/dashboard');
+      return null;
+    }
+
+    if (!isEmpty(errors)) {
+      return { errors };
+    }
+
+    return null;
   }
 
-  // Life cycle method
-  componentWillReceiveProps({ reduxState: { errors } }) {
-    JSON.stringify(errors) !== '{}' && this.setState({ errors })
-  }
+  // // Lifecycle method
+  // componentWillMount() {
+  //   const {
+  //     reduxState: { auth },
+  //     history,
+  //   } = this.props
+  //   if (auth.isAuthenticated) history.push('/dashboard')
+  // }
+  //
+  // // Life cycle method
+  // componentWillReceiveProps({ reduxState: { errors } }) {
+  //   JSON.stringify(errors) !== '{}' && this.setState({ errors })
+  // }
 
   handleFormSubmit = e => {
     e.preventDefault()

@@ -51,7 +51,7 @@ export const SubmitBtn = styled.input`
 
 export default ({ children, title, onSubmit }) => (
   <Form onSubmit={onSubmit}>
-    {title ? <FormHeader>{title}</FormHeader> : null}
+    {title && <FormHeader>{title}</FormHeader>}
     <FormBody>{children}</FormBody>
     <SubmitBtn type="submit" value="Submit" />
   </Form>

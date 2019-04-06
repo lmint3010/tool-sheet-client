@@ -25,6 +25,7 @@ class AddSpreadsheet extends Component {
     errors: '',
   }
 
+  // TODO: Consider changing to getDerivedStateFromProps. ComponentWillReceiveProps is deprecated
   async componentWillReceiveProps({
     reduxState: { errors, google_verify, spreadsheet },
     history,

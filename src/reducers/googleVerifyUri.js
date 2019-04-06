@@ -8,7 +8,10 @@ const initialState = {
 export default (state = initialState, action) => {
   switch(action.type) {
     case SET_GOOGLE_VERIFY_URI:
-      return action.payload
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state
   }

@@ -66,11 +66,9 @@ export default ({
                     : 'enable-fetch'
                 }
                 disabled={
-                  spreadsheetFetching.status &&
-                  spreadsheetFetching.spreadsheetId !==
-                    spreadsheet.spreadsheetId
-                    ? true
-                    : false
+                  !!(spreadsheetFetching.status &&
+                    spreadsheetFetching.spreadsheetId !==
+                    spreadsheet.spreadsheetId)
                 }>
                 <span
                   className={

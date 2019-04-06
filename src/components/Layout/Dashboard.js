@@ -24,7 +24,7 @@ const Container = styled.div`
   box-sizing: border-box;
 `
 
-export default ({ user }) => (
+export default () => (
   <Wrapper>
     <Navbar />
     <Container>

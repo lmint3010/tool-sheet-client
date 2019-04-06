@@ -13,19 +13,38 @@ class GoogleVerify extends Component {
     code: '',
     errors: ''
   }
-
-  componentWillMount() {
-    const { reduxState: { google_verify }, history } = this.props
-    if(!google_verify.url) history.push('/')
-  }
-
-  componentWillReceiveProps({ reduxState: { errors, google_verify }}) {
-    if(!isEmpty(errors)) {
-      this.setState({ errors })
+// TODO: Check - Using GetDerivedStateFromProps in place of the other two DEPRECATED LIfeCycleMethods
+  static getDerivedStateFromProps(props, state) {
+    const { reduxState: { google_verify, errors }, history } =  props;
+    if (!google_verify.url) {
+      history.push('/');
+      return null;
     }
-    if(google_verify.verified)
-      window.location.href = '/'
+
+    if (!isEmpty(errors)) {
+      return { errors };
+    }
+
+    if (google_verify.verified) {
+      window.location.href = '/';
+      return null;
+    }
+
+    return null;
   }
+
+  // componentWillMount() {
+  //   const { reduxState: { google_verify }, history } = this.props
+  //   if(!google_verify.url) history.push('/')
+  // }
+  //
+  // componentWillReceiveProps({ reduxState: { errors, google_verify }}) {
+  //   if(!isEmpty(errors)) {
+  //     this.setState({ errors })
+  //   }
+  //   if(google_verify.verified)
+  //     window.location.href = '/'
+  // }
 
   handleFormChange = ({ target }) => {
     this.setState({ [target.name]: target.value })
@@ -47,8 +66,9 @@ class GoogleVerify extends Component {
 
   handleGetVerifyCode = () => {
     const { reduxState: { google_verify: { url } }} = this.props
-    if(url)
+    if(url) {
       window.open(url, 'popup', 'width=600, height=500, top=50, left=50')
+    }
   }
 
   render() {
