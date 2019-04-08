@@ -92,7 +92,7 @@ export default ({
   noLabel,
 }) => (
   <Wrapper>
-    {noLabel ? null : <Label>{label}</Label>}
+    {noLabel || <Label>{label}</Label>}
     <InputBox>
       <Input
         onChange={onChange}
@@ -102,7 +102,7 @@ export default ({
         borderColor={!error ? 'rgba(135,150,165,.15)' : theme.color.text.danger}
       />
       <Desc>{desc}</Desc>
-      {error ? <Error>{error}</Error> : null}
+      {error && <Error>{error}</Error>}
     </InputBox>
   </Wrapper>
 )

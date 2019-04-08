@@ -37,7 +37,7 @@ const ErrorCode = styled.h2`
   font-size: 22px;
 `
 
-export default props => (
+export default () => (
   <Wrapper>
     <Title>Sorry! the page you are looking for doesn't exist.</Title>
     <Suggestion>

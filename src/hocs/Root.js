@@ -13,10 +13,14 @@ const Wrapper = styled.div`
   padding: 0;
 `
 
-export default props => (
+const withRoot = WrappedComponent => props => (
   <Provider store={store}>
     <Router>
-      <Wrapper>{props.children}</Wrapper>
+      <Wrapper>
+        <WrappedComponent {...props}/>
+      </Wrapper>
     </Router>
   </Provider>
-)
+);
+
+export default withRoot;

@@ -32,7 +32,7 @@ const Subtitle = styled.p`
   margin: 0 0 24px 0;
 `
 
-export default ({ children }) => (
+export default () => (
   <Wrapper>
     <WelcomeBox>
       <Title>Data Entry</Title>

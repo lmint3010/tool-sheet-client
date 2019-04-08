@@ -12,7 +12,7 @@ const Title = styled.h2`
   color: ${theme.color.text.dark};
 `
 
-export default props => (
+export default () => (
   <Wrapper>
     <Title>Documents Need Update</Title>
     {/* <Subtitle>Remember check before you update</Subtitle> */}
