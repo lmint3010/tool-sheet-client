@@ -26,8 +26,7 @@ class AddSpreadsheet extends Component {
   }
 
   async componentWillReceiveProps({
-    reduxState: { errors, google_verify, spreadsheet },
-    history,
+    reduxState: { errors, google_verify, spreadsheet }, history
   }) {
     if (this.state.spreadsheet.loading !== spreadsheet.loading) {
       const nextState = {
