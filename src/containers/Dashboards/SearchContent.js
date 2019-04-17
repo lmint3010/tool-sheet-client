@@ -8,6 +8,7 @@ class SearchContent extends Component {
     search: {
       code: '',
       content: '',
+      filter: '',
     },
     searching: false,
     searchResults: [],
@@ -48,6 +49,7 @@ class SearchContent extends Component {
     } = this
     return (
       <SearchContentUI
+        filter={search.filter}
         searchOnCode={search.code}
         searchResults={searchResults}
         searching={searching}

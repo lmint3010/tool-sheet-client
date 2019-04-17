@@ -64,6 +64,9 @@ export const Cardtitle = styled.a`
   font-weight: 700;
   font-size: ${theme.fontSize.text};
   text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const Cardcontent = styled(Cardtitle)`
@@ -96,11 +99,22 @@ export const CardWrapper = styled.div`
   background-color: white;
   flex-grow: 1;
   align-items: center;
+  position: relative;
 `
 
 export const CardOptions = styled.div`
   display: flex;
   padding-top: 12px;
+`
+
+export const TotalDocs = styled.div`
+  font-weight: bold;
+  color: dodgerblue;
+  padding: 4px 8px;
+  font-size: .8rem;
+  border-radius: 2px;
+  border: 1px dashed dodgerblue;
+  margin-left: .6rem;
 `
 
 export const Option = styled.button`

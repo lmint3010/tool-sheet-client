@@ -33,7 +33,10 @@ class Login extends Component {
     const { LoginDispatch, history } = this.props
     const { errors, ...userData } = this.state
 
-    LoginDispatch(userData, history)
+    LoginDispatch({
+      email: userData.email.trim(),
+      password: userData.password
+    }, history)
   }
 
   handleFormChange = ({ target }) => {

@@ -7,7 +7,10 @@ import isEmpty from '../validation/isEmpty'
 import DashboardUI from '../components/Layout/Dashboard'
 
 class Dashboard extends Component {
-  // Lifecycle Method
+  state = {
+    displayScrollButton: false,
+  }
+
   componentDidMount() {
     const {
       reduxState: { auth, google_verify },
@@ -17,8 +20,28 @@ class Dashboard extends Component {
     if (!isEmpty(google_verify.url)) history.push('/google-verify')
   }
 
+  handleScrolling = event => {
+    const { scrollTop } = event.target
+    const { displayScrollButton } = this.state
+    if (scrollTop > 600 && !displayScrollButton) {
+      this.setState({ displayScrollButton: true })
+    }
+    if (scrollTop < 600 && displayScrollButton) {
+      this.setState({ displayScrollButton: false })
+    }
+  }
+
   render() {
-    return <DashboardUI />
+    const {
+      handleScrolling,
+      state: { displayScrollButton },
+    } = this
+    return (
+      <DashboardUI
+        onScroll={handleScrolling}
+        displayScrollButton={displayScrollButton}
+      />
+    )
   }
 }
 

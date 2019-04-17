@@ -23,23 +23,34 @@ const searchUIComponent = ({
   searching,
   searchResults,
   searchOnCode,
+  filter,
 }) => {
   // Check searching status and render list of results
   let resultsList = <Spinner />
   if (!searching) {
     let result = <NoneResult>No documents found...</NoneResult>
     resultsList = <ListStyled>{result}</ListStyled>
+
     if (searchResults && searchResults.length !== 0) {
-      result = searchResults.map(({ translated, text, position }, index) => (
-        <ContentCard key={index}>
-          <CardDetails>{`${position} - ${searchOnCode}`}</CardDetails>
-          <CardtitleStyled>{text}</CardtitleStyled>
-          <CardcontentStyled defaultValue={translated} />
-        </ContentCard>
-      ))
-      resultsList = <ListStyled>{result}</ListStyled>
-    }
-  }
+      result = searchResults
+        .filter(({ position }) => {
+          return (
+            position
+              .split('|')[0]
+              .trim()
+              .includes(filter) || !filter
+          )
+        })
+        .map(({ translated, text, position }, index) => (
+          <ContentCard key={index}>
+            <CardDetails>{`${position} - ${searchOnCode}`}</CardDetails>
+            <CardtitleStyled>{text}</CardtitleStyled>
+            <CardcontentStyled defaultValue={translated} />
+          </ContentCard>
+        ))
+      result.length > 0 && (resultsList = <ListStyled>{result}</ListStyled>)
+    } // End if condition
+  } // End if !searching condition
   return (
     <>
       <Path>
@@ -72,6 +83,12 @@ const searchUIComponent = ({
           Search Results for{' '}
           <LanguageCode>{searchOnCode || '...'}</LanguageCode>
         </Title>
+        <InputStyled
+          style={{ minWidth: '10vw' }}
+          placeholder="Filter by site name"
+          name="filter"
+          onChange={onChange}
+        />
         {resultsList}
       </Path>
     </>

@@ -22,7 +22,8 @@ export const Subtitle = styled.p`
 
 export const Form = styled.form`
   display: flex;
-  max-width: 50vw;
+  width: calc(100% - 16px);
+  box-sizing: border-box;
 `
 
 export const SubmitBtn2 = styled(SubmitBtn)`

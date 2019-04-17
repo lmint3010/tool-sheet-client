@@ -21,6 +21,7 @@ import {
   Form,
   Input2,
   SubmitBtn2,
+  TotalDocs,
 } from './styled'
 
 // Stateless Component AddSpreadsheet
@@ -45,6 +46,7 @@ export default ({
             <Card>
               <Cardtitle href={spreadsheet.spreadsheetUrl} target="_blank">
                 {spreadsheet.alias}
+                <TotalDocs>{spreadsheet.totalEnglishDocs}</TotalDocs>
               </Cardtitle>
               <Cardcontent>{spreadsheet.title}</Cardcontent>
               <UpdateBy>
