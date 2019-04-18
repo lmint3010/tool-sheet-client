@@ -18,16 +18,17 @@ class AddSpreadsheet extends Component {
   state = {
     input: { sprsheetUri: '', alias: '' },
     list: [],
+    filter: '',
     spreadsheet: {
       loading: false,
       fetching: { status: false, spreadsheetId: '' },
     },
     errors: '',
+    needVerify: false,
   }
 
   async componentWillReceiveProps({
-    reduxState: { errors, google_verify, spreadsheet },
-    history,
+    reduxState: { errors, google_verify, spreadsheet, waiting_verify },
   }) {
     if (this.state.spreadsheet.loading !== spreadsheet.loading) {
       const nextState = {
@@ -36,6 +37,7 @@ class AddSpreadsheet extends Component {
       }
       this.setState({ spreadsheet: nextState })
     }
+
     if (
       this.state.spreadsheet.fetching.spreadsheetId !==
       spreadsheet.fetching.spreadsheetId
@@ -49,17 +51,20 @@ class AddSpreadsheet extends Component {
       }
       this.setState({ spreadsheet: nextState })
     }
-    if (!isEmpty(errors)) {
-      this.setState({ errors })
-    }
-    if (google_verify.url) {
-      history.push('/google-verify')
+
+    if (!isEmpty(errors)) this.setState({ errors })
+
+    if (google_verify.url && !waiting_verify) {
+      this.setState({ needVerify: true })
       window.open(
         google_verify.url,
         'popup',
         'width=600, height=500, left=50, top=50'
       )
+    } else {
+      this.setState({ needVerify: false })
     }
+
     if (!spreadsheet.loading) {
       const list = await getAllSpreadsheet()
       this.setState({ list })
@@ -127,24 +132,34 @@ class AddSpreadsheet extends Component {
       .catch(err => console.log(err))
   }
 
+  handleFilter = event => {
+    event.preventDefault()
+    const { name, value } = event.target
+    this.setState({ [name]: value })
+  }
+
   render() {
     const {
-      state: { list, errors, spreadsheet },
+      state: { list, errors, spreadsheet, filter, needVerify },
       handleFormChange,
       handleFormSubmit,
       handleDeleteSpreadsheet,
       handleFetchSpreadsheet,
       handleSyncSpreadsheet,
+      handleFilter,
     } = this
 
     return (
       <AddSpreadsheetUI
         errors={errors}
         list={list}
+        filter={filter}
         onDelete={handleDeleteSpreadsheet}
         onSubmit={handleFormSubmit}
         onChange={handleFormChange}
         onFetch={handleFetchSpreadsheet}
+        onFilter={handleFilter}
+        displayVerify={needVerify}
         spreadsheetSync={handleSyncSpreadsheet}
         spreadsheetLoading={spreadsheet.loading}
         spreadsheetFetching={spreadsheet.fetching}
@@ -153,8 +168,14 @@ class AddSpreadsheet extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, errors, google_verify, spreadsheet }) => ({
-  reduxState: { auth, errors, google_verify, spreadsheet },
+const mapStateToProps = ({
+  auth,
+  errors,
+  google_verify,
+  spreadsheet,
+  waiting_verify,
+}) => ({
+  reduxState: { auth, errors, google_verify, spreadsheet, waiting_verify },
 })
 
 const mapDispatchToProps = {

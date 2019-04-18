@@ -2,7 +2,6 @@ import React from 'react'
 import isEmpty from '../../../validation/isEmpty'
 import moment from 'moment'
 import { Error } from '../../../themes/styled_comp/InputGroup'
-import Spinner from '../Spinner/Spinner'
 import '../style.css'
 import '../../../assets/icons/all.min.css'
 import {
@@ -24,76 +23,88 @@ import {
   TotalDocs,
 } from './styled'
 
+// Components
+import Spinner from '../Spinner'
+import FloatVerify from '../../../containers/FloatVerify'
+
 // Stateless Component AddSpreadsheet
 export default ({
   list,
+  filter,
   onChange,
   onSubmit,
+  onFilter,
   errors,
   onDelete,
   onFetch,
   spreadsheetLoading,
   spreadsheetFetching,
   spreadsheetSync,
+  displayVerify
 }) => {
   // Initial List Spreadsheet
   let listSpreadsheet = <Spinner color="#2196f3" />
+  let totalDocuments = 0
+  let newList = list.filter(e => e.alias.toLowerCase().includes(filter))
   if (!spreadsheetLoading) {
     listSpreadsheet = (
       <List>
-        {list.map((spreadsheet, index) => (
-          <CardWrapper key={index}>
-            <Card>
-              <Cardtitle href={spreadsheet.spreadsheetUrl} target="_blank">
-                {spreadsheet.alias}
-                <TotalDocs>{spreadsheet.totalEnglishDocs}</TotalDocs>
-              </Cardtitle>
-              <Cardcontent>{spreadsheet.title}</Cardcontent>
-              <UpdateBy>
-                {moment(spreadsheet.updated).fromNow()} by{' '}
-                <Author>{spreadsheet.creator}</Author>
-              </UpdateBy>
-            </Card>
-            <CardOptions>
-              <Option onClick={() => onDelete(spreadsheet._id)}>
-                <i className="far fa-trash" />
-              </Option>
-              <Option
-                onClick={() => onFetch(spreadsheet.spreadsheetId)}
-                className={
-                  spreadsheetFetching.status &&
-                  spreadsheetFetching.spreadsheetId !==
-                    spreadsheet.spreadsheetId
-                    ? 'disable-fetch'
-                    : 'enable-fetch'
-                }
-                disabled={
-                  spreadsheetFetching.status &&
-                  spreadsheetFetching.spreadsheetId !==
-                    spreadsheet.spreadsheetId
-                    ? true
-                    : false
-                }>
-                <span
+        {newList.map((spreadsheet, index) => {
+          totalDocuments += spreadsheet.totalEnglishDocs
+          return (
+            <CardWrapper key={index}>
+              <Card>
+                <Cardtitle href={spreadsheet.spreadsheetUrl} target="_blank">
+                  {spreadsheet.alias}
+                  <TotalDocs>{spreadsheet.totalEnglishDocs}</TotalDocs>
+                </Cardtitle>
+                <Cardcontent>{spreadsheet.title}</Cardcontent>
+                <UpdateBy>
+                  {moment(spreadsheet.updated).fromNow()} by{' '}
+                  <Author>{spreadsheet.creator}</Author>
+                </UpdateBy>
+              </Card>
+              <CardOptions>
+                <Option onClick={() => onDelete(spreadsheet._id)}>
+                  <i className="far fa-trash" />
+                </Option>
+                <Option
+                  onClick={() => onFetch(spreadsheet.spreadsheetId)}
                   className={
                     spreadsheetFetching.status &&
-                    spreadsheetFetching.spreadsheetId ===
+                    spreadsheetFetching.spreadsheetId !==
                       spreadsheet.spreadsheetId
-                      ? 'spreadsheet-fetching'
-                      : ''
+                      ? 'disable-fetch'
+                      : 'enable-fetch'
+                  }
+                  disabled={
+                    spreadsheetFetching.status &&
+                    spreadsheetFetching.spreadsheetId !==
+                      spreadsheet.spreadsheetId
+                      ? true
+                      : false
                   }>
-                  <i className="far fa-sync" />
-                </span>
-              </Option>
-              <Option
-                onClick={() =>
-                  spreadsheetSync(spreadsheet.spreadsheetId, spreadsheet._id)
-                }>
-                <i className="far fa-pen-alt" />
-              </Option>
-            </CardOptions>
-          </CardWrapper>
-        ))}
+                  <span
+                    className={
+                      spreadsheetFetching.status &&
+                      spreadsheetFetching.spreadsheetId ===
+                        spreadsheet.spreadsheetId
+                        ? 'spreadsheet-fetching'
+                        : ''
+                    }>
+                    <i className="far fa-sync" />
+                  </span>
+                </Option>
+                <Option
+                  onClick={() =>
+                    spreadsheetSync(spreadsheet.spreadsheetId, spreadsheet._id)
+                  }>
+                  <i className="far fa-pen-alt" />
+                </Option>
+              </CardOptions>
+            </CardWrapper>
+          )
+        })}
       </List>
     )
   }
@@ -121,10 +132,18 @@ export default ({
       </Path>
 
       <Path>
-        <Title>Spreadsheet List</Title>
+        <Title>
+          Spreadsheet List{' '}
+          <span style={{ color: 'dodgerblue', marginLeft: '4px' }}>
+            {totalDocuments}
+          </span>
+        </Title>
         <Subtitle>List of existed Google Spreadsheet</Subtitle>
+        <Input2 onChange={onFilter} placeholder="Filter" name="filter" />
         {listSpreadsheet}
       </Path>
+
+      <FloatVerify display={displayVerify} />
     </>
   )
 }

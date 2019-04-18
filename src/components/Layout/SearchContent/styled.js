@@ -86,6 +86,7 @@ export const NoneResult = styled.div`
 
 export const CardtitleStyled = styled(Cardtitle)`
   text-transform: none;
+  justify-content: flex-start;
 `
 
 export const CardcontentStyled = styled.textarea`
@@ -105,5 +106,6 @@ export const CardcontentStyled = styled.textarea`
   min-height: 6rem;
   border: 1px dashed transparent;
   outline: none;
-  transition: 140ms linear
+  transition: 140ms linear;
+  padding-left: 2px;
 `

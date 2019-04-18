@@ -60,6 +60,7 @@ export const fetchSpreadsheetDispatch = requestBody => dispatch => {
     })
     .catch(err => {
       if (err.response.data.verifyUri) {
+        dispatch(setFetchingSpreadsheet(false, ''))
         return dispatch(setGoogleVerifyUri(err.response.data.verifyUri, false))
       }
       dispatch(setFetchingSpreadsheet(false, ''))

@@ -6,6 +6,7 @@ import errorsReducer from './errors'
 import googleVerifyUriReducer from './googleVerifyUri'
 import spreadsheet from './spreadsheet'
 import searchContent from './search'
+import waiting_verify from './floatVeirfy'
 
 export default combineReducers({
   errors: errorsReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   google_verify: googleVerifyUriReducer,
   spreadsheet: spreadsheet,
   searching: searchContent,
+  waiting_verify,
 })
