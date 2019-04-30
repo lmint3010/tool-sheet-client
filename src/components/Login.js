@@ -11,10 +11,12 @@ import theme from '../themes'
 const StyledLink = styled(Link)`
   &:hover {
     color: ${theme.color.text.main};
+    text-decoration: underline;
   }
   font-size: 13px;
   display: inline-block;
   margin-top: 8px;
+  text-decoration: none;
   color: ${theme.color.text.grayLight};
 `
 
@@ -35,6 +37,11 @@ export default ({ onChange, onSubmit, errors }) => (
       name="password"
       error={errors.password}
     />
-    <StyledLink to="/signup">Create new account?</StyledLink>
+    <StyledLink to="/signup" style={{ marginRight: '8px' }}>
+      Create new account?
+    </StyledLink>
+    <StyledLink to="/resetPassword" style={{ marginLeft: '8px' }}>
+      Forgot password?
+    </StyledLink>
   </Form>
 )

@@ -7,6 +7,7 @@ import googleVerifyUriReducer from './googleVerifyUri'
 import spreadsheet from './spreadsheet'
 import searchContent from './search'
 import waiting_verify from './floatVeirfy'
+import resetPassword from './resetPassword'
 
 export default combineReducers({
   errors: errorsReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   spreadsheet: spreadsheet,
   searching: searchContent,
   waiting_verify,
+  resetPasswordSend: resetPassword,
 })

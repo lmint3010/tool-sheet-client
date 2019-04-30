@@ -11,6 +11,9 @@ export default {
     signup: bindUrl('/users/signup'),
     signin: bindUrl('/users/signin'),
     all: bindUrl('/users/all'),
+    resetPassword: bindUrl('/users/reset-password'),
+    validToken: bindUrl('/users/valid-resettoken'),
+    renewPassword: bindUrl('/users/renew-password'),
   },
   spreadsheet: {
     fetch: bindUrl('/sprsheet/fetch'),
@@ -19,6 +22,8 @@ export default {
     listall: bindUrl('/sprsheet/all'),
     search: bindUrl('/sprsheet/search'),
     syncinfo: bindUrl('/sprsheet/syncinfo'),
+    like: bindUrl('/sprsheet/setdefault'),
+    workspaceData: bindUrl('/sprsheet/get-workspace-data'),
   },
   google: {
     setToken: bindUrl('/auth/settoken'),

@@ -41,12 +41,26 @@ export const deleteSpreadsheetDispatch = requestBody => dispatch => {
   dispatch(setLoadingSpreadsheet(true))
   axios
     .post(api.spreadsheet.delete, requestBody)
-    .then(res => {
+    .then(() => {
       dispatch(setLoadingSpreadsheet(false))
     })
     .catch(err => {
       dispatch(setLoadingSpreadsheet(false))
       dispatch(setErrors(err))
+    })
+}
+
+export const likeSpreadsheetDispatch = requestBody => dispatch => {
+  dispatch(clearErrors())
+  dispatch(setLoadingSpreadsheet(true))
+  axios
+    .post(api.spreadsheet.like, requestBody)
+    .then(() => {
+      dispatch(setLoadingSpreadsheet(false))
+    })
+    .catch(err => {
+      dispatch(setLoadingSpreadsheet(false))
+      console.log(err)
     })
 }
 
@@ -66,4 +80,17 @@ export const fetchSpreadsheetDispatch = requestBody => dispatch => {
       dispatch(setFetchingSpreadsheet(false, ''))
       console.log('Fail to fetch', err)
     })
+}
+
+// Use in React hooks
+/** Fetch all translations data from database
+ * @param {Object} requestBody <listSite> - Array of sites - Convert to String
+ */
+export const fetchWorkspaceData = async requestBody => {
+  try {
+    const data = axios.post(api.spreadsheet.workspaceData, requestBody)
+    return data
+  } catch (err) {
+    console.log('Fail to get workspace data:', err)
+  }
 }

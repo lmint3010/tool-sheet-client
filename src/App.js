@@ -14,6 +14,7 @@ import Root from './hocs/Root'
 import Authenticate from './components/Layout/Authenticate'
 import Dashboard from './containers/Dashboard'
 import Page404 from './components/Layout/404Page'
+// import ResetPassword from './components/ResetPassword'
 
 // Verify token on each time application is loaded
 if (localStorage.data_entry_tool_jwt) {
@@ -34,12 +35,14 @@ class App extends Component {
     return (
       <Root>
         <Switch>
+          <Route path="/resetPassword" component={Authenticate} />
           <Route exact path="/" component={Authenticate} />
           <Route exact path="/signup" component={Authenticate} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/searchcontent" component={Dashboard} />
           <Route exact path="/needupdates" component={Dashboard} />
-          <Route exact path="/google-verify" component={Dashboard} />
+          <Route exact path="/searchonproject" component={Dashboard} />
+          {/* <Route exact path="/google-verify" component={Dashboard} /> */}
           <Route exact path="/users" component={Dashboard} />
           <Route component={Page404} />
         </Switch>

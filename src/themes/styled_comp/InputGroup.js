@@ -29,7 +29,7 @@ export const Input = styled.input`
   }
   border-width: 1px;
   border-style: solid;
-  border-color: ${props => props.borderColor};
+  border-color: ${props => props.borderColor || 'rgba(100, 100, 100, .15)'};
   border-radius: 4px;
   color: ${theme.color.text.gray};
   font-weight: 500;

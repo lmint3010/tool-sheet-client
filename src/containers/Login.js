@@ -14,16 +14,6 @@ class Login extends Component {
     errors: {},
   }
 
-  // Lifecycle method
-  componentWillMount() {
-    const {
-      reduxState: { auth },
-      history,
-    } = this.props
-    if (auth.isAuthenticated) history.push('/dashboard')
-  }
-
-  // Life cycle method
   componentWillReceiveProps({ reduxState: { errors } }) {
     JSON.stringify(errors) !== '{}' && this.setState({ errors })
   }
@@ -33,10 +23,13 @@ class Login extends Component {
     const { LoginDispatch, history } = this.props
     const { errors, ...userData } = this.state
 
-    LoginDispatch({
-      email: userData.email.trim(),
-      password: userData.password
-    }, history)
+    LoginDispatch(
+      {
+        email: userData.email.trim(),
+        password: userData.password,
+      },
+      history
+    )
   }
 
   handleFormChange = ({ target }) => {

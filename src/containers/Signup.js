@@ -16,12 +16,6 @@ class SignUp extends Component {
   }
 
   // Lifecycle method
-  componentWillMount() {
-    const { reduxState: { auth }, history } = this.props
-    if(auth.isAuthenticated) history.push('/dashboard')
-  }
-
-  // Lifecycle method
   componentWillReceiveProps({ reduxState: { errors }}) {
     JSON.stringify(errors) !== '{}' && this.setState({ errors })
   }

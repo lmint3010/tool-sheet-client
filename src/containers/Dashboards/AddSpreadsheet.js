@@ -6,6 +6,7 @@ import {
   addNewSpreadsheetDispatch,
   deleteSpreadsheetDispatch,
   fetchSpreadsheetDispatch,
+  likeSpreadsheetDispatch,
 } from '../../actions/spreadsheetAction'
 import { setLoadingSpreadsheet } from '../../actions/creators/spreadsheet'
 import { getAllSpreadsheet } from '../../actions/spreadsheetAction'
@@ -132,6 +133,17 @@ class AddSpreadsheet extends Component {
       .catch(err => console.log(err))
   }
 
+  handleLikeSpreadsheet = spreadsheetId => {
+    const {
+      reduxState: {
+        auth: {
+          user: { _id: userId },
+        },
+      },
+    } = this.props
+    this.props.likeSpreadsheetDispatch({ userId, spreadsheetId })
+  }
+
   handleFilter = event => {
     event.preventDefault()
     const { name, value } = event.target
@@ -141,16 +153,23 @@ class AddSpreadsheet extends Component {
   render() {
     const {
       state: { list, errors, spreadsheet, filter, needVerify },
+      props: {
+        reduxState: {
+          auth: { user },
+        },
+      },
       handleFormChange,
       handleFormSubmit,
       handleDeleteSpreadsheet,
       handleFetchSpreadsheet,
       handleSyncSpreadsheet,
+      handleLikeSpreadsheet,
       handleFilter,
     } = this
 
     return (
       <AddSpreadsheetUI
+        user={user}
         errors={errors}
         list={list}
         filter={filter}
@@ -161,6 +180,7 @@ class AddSpreadsheet extends Component {
         onFilter={handleFilter}
         displayVerify={needVerify}
         spreadsheetSync={handleSyncSpreadsheet}
+        spreadsheetLike={handleLikeSpreadsheet}
         spreadsheetLoading={spreadsheet.loading}
         spreadsheetFetching={spreadsheet.fetching}
       />
@@ -182,6 +202,7 @@ const mapDispatchToProps = {
   addNewSpreadsheetDispatch,
   deleteSpreadsheetDispatch,
   fetchSpreadsheetDispatch,
+  likeSpreadsheetDispatch,
 }
 
 export default connect(

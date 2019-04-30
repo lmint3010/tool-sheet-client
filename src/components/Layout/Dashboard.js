@@ -7,6 +7,8 @@ import AddSpreadsheet from '../../containers/Dashboards/AddSpreadsheet'
 // import GoogleVerify from '../../containers/Dashboards/GoogleVerify'
 import SearchContent from '../../containers/Dashboards/SearchContent'
 // import NeedUpdates from '../../containers/Dashboards/NeedUpdates'
+import SearchOnProject from '../../components/Layout/SearchOnProject'
+
 import Navbar from '../../containers/Navbar'
 import Teammate from '../../containers/Dashboards/Teammate'
 import ScrollTopButton from '../../containers/ScrollTopButton'
@@ -29,11 +31,11 @@ export default ({ user, onScroll, displayScrollButton }) => (
   <Wrapper>
     <Navbar />
     <Container id="scollTopDiv" onScroll={onScroll}>
-      <Route exact path="/dashboard" component={AddSpreadsheet} />
       {/* <Route exact path="/google-verify" component={GoogleVerify} /> */}
+      <Route exact path="/dashboard" component={AddSpreadsheet} />
       <Route exact path="/searchcontent" component={SearchContent} />
-      {/* <Route exact path="/needupdates" component={NeedUpdates} /> */}
       <Route exact path="/users" component={Teammate} />
+      <Route exact path="/searchonproject" component={SearchOnProject} />
     </Container>
     <ScrollTopButton on="scollTopDiv" isVisible={displayScrollButton} />
   </Wrapper>

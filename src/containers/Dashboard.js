@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import isEmpty from '../validation/isEmpty'
+// import isEmpty from '../validation/isEmpty'
 // Components
 import DashboardUI from '../components/Layout/Dashboard'
 
@@ -11,14 +11,12 @@ class Dashboard extends Component {
     displayScrollButton: false,
   }
 
-  // componentDidMount() {
-  //   const {
-  //     reduxState: { auth, google_verify },
-  //     history,
-  //   } = this.props
-  //   if (!auth.isAuthenticated) history.push('/')
-  //   if (!isEmpty(google_verify.url)) history.push('/google-verify')
-  // }
+  componentDidMount() {
+    const {
+      reduxState: { auth },
+    } = this.props
+    if (!auth.isAuthenticated) window.location.href = '/'
+  }
 
   handleScrolling = event => {
     const { scrollTop } = event.target

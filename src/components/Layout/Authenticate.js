@@ -1,10 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { protectedRoute } from '../../routes'
 
 import theme from '../../themes'
 import LoginForm from '../../containers/Login'
 import SignUp from '../../containers/Signup'
+import ResetPassword from '../../components/ResetPassword'
+import ResetPasswordForm from '../../components/ResetPassword/form'
 
 const Wrapper = styled.div`
   background-color: ${theme.color.background.light};
@@ -32,13 +36,41 @@ const Subtitle = styled.p`
   margin: 0 0 24px 0;
 `
 
-export default ({ children }) => (
-  <Wrapper>
-    <WelcomeBox>
-      <Title>Data Entry</Title>
-      <Subtitle>Use this tool to hack your tasks performance</Subtitle>
-      <Route exact path="/" component={LoginForm} />
-      <Route exact path="/signup" component={SignUp} />
-    </WelcomeBox>
-  </Wrapper>
-)
+const AuthenticateUI = ({ isAuthenticated }) => {
+  return (
+    <Wrapper>
+      <WelcomeBox>
+        <Title>Data Entry</Title>
+        <Subtitle>Use this tool to hack your tasks performance</Subtitle>
+        <Route
+          exact
+          path="/"
+          render={() =>
+            protectedRoute(isAuthenticated, '/dashboard', <LoginForm />)
+          }
+        />
+        <Route
+          exact
+          path="/signup"
+          render={() =>
+            protectedRoute(isAuthenticated, '/dashboard', <SignUp />)
+          }
+        />
+        <Route
+          exact
+          path="/resetPassword"
+          render={() => protectedRoute(isAuthenticated, '/', <ResetPassword />)}
+        />
+        <Route
+          exact
+          path="/resetPassword/:token/:userid"
+          render={({match}) => protectedRoute(isAuthenticated, '/', <ResetPasswordForm match={match} />)}
+        />
+      </WelcomeBox>
+    </Wrapper>
+  )
+}
+
+const mapStateToProps = ({ auth: { isAuthenticated } }) => ({ isAuthenticated })
+
+export default connect(mapStateToProps)(React.memo(AuthenticateUI))

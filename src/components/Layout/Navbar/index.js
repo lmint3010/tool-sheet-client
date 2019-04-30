@@ -88,7 +88,7 @@ const NavbarUI = ({ user, logout, toolbox, onChange, options }) => {
           ))}
         </List>
       </NavBody>
-      <Powered>Powered by Coders.Tokyo</Powered>
+      <Powered>DFO Global Performance {new Date().getFullYear()}</Powered>
     </Nav>
   )
 }

@@ -30,6 +30,11 @@ const FormBody = styled.div`
 `
 
 export const SubmitBtn = styled.input`
+  &:disabled, &:disabled:hover {
+    background: rgba(120, 120, 120 ,1);
+    border-color: rgba(120, 120, 120 ,1);
+    cursor: not-allowed;
+  }
   &:hover {
     background-color: #1e73ff;
     border-color: #1e73ff;
@@ -49,10 +54,10 @@ export const SubmitBtn = styled.input`
   transition: 0.06s linear;
 `
 
-export default ({ children, title, onSubmit }) => (
+export default ({ children, title, onSubmit, isSubmit }) => (
   <Form onSubmit={onSubmit}>
     {title ? <FormHeader>{title}</FormHeader> : null}
     <FormBody>{children}</FormBody>
-    <SubmitBtn type="submit" value="Submit" />
+    <SubmitBtn type="submit" value="Submit" disabled={isSubmit} />
   </Form>
 )

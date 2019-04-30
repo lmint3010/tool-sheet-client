@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import NavbarUI from '../components/Layout/Navbar/index'
+import NavbarUI from '../components/Layout/Navbar'
 
 // Import Dispatch
 import { LogoutDispatch } from '../actions/userAuthAction'
@@ -23,13 +23,25 @@ class Navbar extends Component {
         disabled: false,
       },
       {
-        title: 'Need Updates',
-        path: '/needupdates',
-        icon: 'far fa-pencil',
+        title: 'Search Workspace',
+        path: '/searchonproject',
+        icon: 'far fa-bullseye-arrow',
+        disabled: false,
+      },
+      {
+        title: 'Generator',
+        path: '/generator',
+        icon: 'far fa-tasks-alt',
         disabled: true,
       },
     ],
     options: [
+      {
+        title: 'Update Information',
+        path: '/users-modify',
+        icon: 'far fa-user-edit',
+        disabled: true,
+      },
       {
         title: 'My Teammates',
         path: '/users',

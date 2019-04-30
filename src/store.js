@@ -1,6 +1,8 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
+// import { createStore, applyMiddleware } from 'redux' // --- Production ---
 
+import { createStore, applyMiddleware, compose } from 'redux' // --- Develop ---
+
+import thunk from 'redux-thunk'
 // Final Reducer
 import rootReducer from './reducers/index'
 

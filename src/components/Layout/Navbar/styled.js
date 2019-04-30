@@ -116,10 +116,11 @@ export const Powered = styled.div`
   bottom: 0;
   left: 0;
   font-size: ${theme.fontSize.sub_text};
-  color: mediumseagreen;
+  color: #e3f2fd;
   box-sizing: border-box;
   padding: 0.6rem 0;
   text-align: center;
   width: 100%;
-  background-color: rgba(150, 150, 150, 0.12);
+  background: #64b5f6;
+  user-select: none;
 `

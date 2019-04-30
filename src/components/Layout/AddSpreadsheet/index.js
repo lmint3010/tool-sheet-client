@@ -21,6 +21,7 @@ import {
   Input2,
   SubmitBtn2,
   TotalDocs,
+  Heart,
 } from './styled'
 
 // Components
@@ -29,6 +30,7 @@ import FloatVerify from '../../../containers/FloatVerify'
 
 // Stateless Component AddSpreadsheet
 export default ({
+  user,
   list,
   filter,
   onChange,
@@ -40,7 +42,8 @@ export default ({
   spreadsheetLoading,
   spreadsheetFetching,
   spreadsheetSync,
-  displayVerify
+  spreadsheetLike,
+  displayVerify,
 }) => {
   // Initial List Spreadsheet
   let listSpreadsheet = <Spinner color="#2196f3" />
@@ -101,6 +104,15 @@ export default ({
                   }>
                   <i className="far fa-pen-alt" />
                 </Option>
+                <Heart
+                  className={`fas fa-heart-circle ${
+                    spreadsheet.userLiked &&
+                    spreadsheet.userLiked.includes(user._id)
+                      ? 'active'
+                      : ''
+                  }`}
+                  onClick={() => spreadsheetLike(spreadsheet._id)}
+                />
               </CardOptions>
             </CardWrapper>
           )

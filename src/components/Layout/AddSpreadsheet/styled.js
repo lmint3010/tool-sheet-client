@@ -111,10 +111,10 @@ export const TotalDocs = styled.div`
   font-weight: bold;
   color: dodgerblue;
   padding: 4px 8px;
-  font-size: .8rem;
+  font-size: 0.8rem;
   border-radius: 2px;
   border: 1px dashed dodgerblue;
-  margin-left: .6rem;
+  margin-left: 0.6rem;
 `
 
 export const Option = styled.button`
@@ -127,11 +127,22 @@ export const Option = styled.button`
   transform-origin: 0% 50%;
   padding: 6px 20px;
   flex-grow: 1;
-  margin: 0 6px;
+  lmargin: 0 6px;
   border-radius: 4px;
   border: 1px solid transparent;
   font-size: 14px;
   transition: 160ms ease-out;
   background-color: white;
   color: dodgerblue;
+`
+
+export const Heart = styled.i`
+  &.active {
+    color: #f44336;
+  }
+  font-size: 1.4rem;
+  padding: 6px 10px;
+  color: rgba(120, 120, 120, 0.15);
+  transition: 140ms ease;
+  cursor: pointer;
 `
