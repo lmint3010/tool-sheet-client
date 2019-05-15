@@ -42,6 +42,7 @@ class App extends Component {
           <Route exact path="/searchcontent" component={Dashboard} />
           <Route exact path="/needupdates" component={Dashboard} />
           <Route exact path="/searchonproject" component={Dashboard} />
+          <Route exact path="/smarttranslator" component={Dashboard} />
           {/* <Route exact path="/google-verify" component={Dashboard} /> */}
           <Route exact path="/users" component={Dashboard} />
           <Route component={Page404} />

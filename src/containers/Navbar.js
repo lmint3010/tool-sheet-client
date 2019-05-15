@@ -29,6 +29,12 @@ class Navbar extends Component {
         disabled: false,
       },
       {
+        title: 'Smart Translator',
+        path: '/smarttranslator',
+        icon: 'far fa-bolt',
+        disabled: true,
+      },
+      {
         title: 'Generator',
         path: '/generator',
         icon: 'far fa-tasks-alt',

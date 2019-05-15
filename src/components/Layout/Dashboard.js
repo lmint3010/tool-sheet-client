@@ -8,6 +8,7 @@ import AddSpreadsheet from '../../containers/Dashboards/AddSpreadsheet'
 import SearchContent from '../../containers/Dashboards/SearchContent'
 // import NeedUpdates from '../../containers/Dashboards/NeedUpdates'
 import SearchOnProject from '../../components/Layout/SearchOnProject'
+import SmartTranslator from '../../components/Layout/SmartTranslator'
 
 import Navbar from '../../containers/Navbar'
 import Teammate from '../../containers/Dashboards/Teammate'
@@ -36,6 +37,7 @@ export default ({ user, onScroll, displayScrollButton }) => (
       <Route exact path="/searchcontent" component={SearchContent} />
       <Route exact path="/users" component={Teammate} />
       <Route exact path="/searchonproject" component={SearchOnProject} />
+      <Route exact path="/smarttranslator" component={SmartTranslator} />
     </Container>
     <ScrollTopButton on="scollTopDiv" isVisible={displayScrollButton} />
   </Wrapper>
